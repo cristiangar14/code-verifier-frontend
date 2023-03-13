@@ -10,11 +10,24 @@ import { AxiosResponse } from 'axios';
 
 const registerSchema = Yup.object().shape(
     {
-        name: Yup.string().min(3,'The name must contain at least three letters').max(50,'the name cn contain a maximum of 50 characters').required('Name is required'),
-        email: Yup.string().email('Invalid Email Format').required('Email is required'),
-        password: Yup.string().min(8, 'Password must contain at least 8 characters').required('Password is required'),
-        confirmPassword: Yup.string().oneOf([Yup.ref('password')],'The password does not match').required('Password is required'),
-        age: Yup.number().required('Age is required').positive().integer(),
+        name: Yup.string()
+            .min(3,'Username must have three letters minimum')
+            .max(12,'Username contain a maximum of 12 characters')
+            .required('Name is required'),
+        email: Yup.string()
+            .email('Invalid Email Format')
+            .required('Email is required'),
+        password: Yup.string()
+            .min(8, 'Password too short')
+            .required('Password is required'),
+        confirmPassword: Yup.string()
+            .oneOf([Yup.ref('password')],'The password does not match')
+            .required('You must confirm your password'),
+        age: Yup.number()
+            .min(10, 'You must be over 10 years old')
+            .positive('age must be a positive value')
+            .integer('age must be an integer value')
+            .required('Age is required'),
     }
 )
 
@@ -33,22 +46,19 @@ const RegisterForm = () => {
 
   return (
     <div>
-        <h4>Register</h4>
+        <h4>Register as a new User</h4>
         {/*  Formik to encapsulate a form */}
         <Formik 
             initialValues={initialRegister}
             validationSchema={registerSchema}
             onSubmit={  async(values) => {
-                register(values.name, values.email, values.password, values.age).then((response: AxiosResponse) => {
+                const {name, email, password, age} = values;
+                register(name, email, password, age).then((response: AxiosResponse) => {
                     if (response.status === 200) {
                         console.log(response.data)
-
                     } else {
-                        throw new Error('Invalid crendetials');
+                        throw new Error('Error in registry');
                     }
-
-
-
                 }).catch((error) => console.error(`[REGISTER ERROR]: something went wrong: ${error}`))
             }}
         >
@@ -58,7 +68,7 @@ const RegisterForm = () => {
                         <Form>
                             {/* Name */}
                             <label htmlFor='name'>name</label>
-                            <Field id='name' type='text' name='name' placeholder='Name' />
+                            <Field id='name' type='text' name='name' placeholder='Your Name' />
                             {/*  Name Erros */}
                             {
                                 errors.name && touched.name && (
@@ -107,11 +117,11 @@ const RegisterForm = () => {
 
 
                             {/* Submit Form */}
-                            <button type='submit'>Login</button>
+                            <button type='submit'>Register</button>
                             {/*  Message is the form is submitting */}
                             {
                                 isSubmitting 
-                                    ? (<p>Checking crendetials...</p>)
+                                    ? (<p>Sending data to registry...</p>)
                                     : null
                             }
                         </Form>
