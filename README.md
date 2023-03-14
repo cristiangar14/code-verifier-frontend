@@ -46,9 +46,10 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 To learn React, check out the [React documentation](https://reactjs.org/).
 
 ## Dependencies
-- react-router-dom -> Routes
-- formik -> forms
-- yup -> forms validation 
+- react-Router-dom -> Routes
+- formik -> Forms
+- yup -> Forms validation 
 - axios -> HTTP
-- node-sass -> styles
+- node-sass -> Styles
 - prism-react-renderer -> Editor
+- MUI -> Styles
