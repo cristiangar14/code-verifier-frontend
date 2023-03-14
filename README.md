@@ -51,3 +51,4 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 - yup -> forms validation 
 - axios -> HTTP
 - node-sass -> styles
+- prism-react-renderer -> Editor
