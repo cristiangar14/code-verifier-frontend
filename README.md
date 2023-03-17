@@ -54,3 +54,4 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 - prism-react-renderer -> Editor
 - MUI -> Styles
 - react-simple-code-editor -> Editor
+- tiptap editor -> Editor
