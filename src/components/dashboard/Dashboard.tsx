@@ -32,6 +32,8 @@ import Grid from '@mui/material/Grid';
 
 //List for the menu
 import { MenuItems } from './MenuItems';
+import { NewEditor } from '../editor/NewEditor';
+import { Tiptap } from '../editor/TiptapEditor';
 
 // Width for drawer menu
 const drawerWidth: number = 240;
@@ -204,10 +206,12 @@ export const Dashboard = () => {
                                     p: 2,
                                     display: 'flex',
                                     flexDirection: 'column',
-                                    height: 240
+                                    height: 400
                                 }}
                             >
-
+                                {/* Code Editor */}
+                                <NewEditor />
+                                {/* <Tiptap /> */}
                             </Paper>
                         </Grid>
                     </Container>
